@@ -15,7 +15,7 @@ const Login = () => {
   }
 
   return <div className="flex items-center justify-center">
-    <form className="flex items-center flex-col w-1/6 px-3 py-2 gap-2" onSubmit={handleSubmit(loginHandle)} autoComplete="off">
+    <form className="flex items-center flex-col w-full  px-10 mt-10 py-5 gap-2 md:w-2/3 lg:w-1/3" onSubmit={handleSubmit(loginHandle)} autoComplete="off">
       <h1 className="font-semibold mb-10 text-2xl">Log in</h1>
       <input type="email"
         {...register("emailid", { required: "Email can't blank" })}
