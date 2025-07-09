@@ -6,11 +6,11 @@ const initialState = {
 const userSlice = createSlice({
     name: "user",
     initialState,
-    reducers: {
-        loaduser: (state, actions) => {
-            state.userData = actions.payload
+        reducers: {
+            loaduser: (state, actions) => {
+                state.userData = actions.payload
+            }
         }
-    }
 
 })
 

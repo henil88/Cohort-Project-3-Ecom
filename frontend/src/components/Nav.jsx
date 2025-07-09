@@ -29,8 +29,8 @@ const Nav = ({ open, setOpen }) => {
     <NavLink to="/" className={`mt-10 md:mt-0`} onClick={() => { setOpen(false) }}>Home</NavLink>
     <NavLink to="/products" onClick={() => { setOpen(false) }}>Products</NavLink>
     {user ? <>
-
       <NavLink to="/cart" onClick={() => { setOpen(false) }}>Cart</NavLink>
+      <NavLink to="/admin/create-product" onClick={() => { setOpen(false) }}>Create Product</NavLink>
     </> : <>
 
       <NavLink to="/login" onClick={() => { setOpen(false) }}>Login</NavLink>

@@ -14,7 +14,12 @@ export const registerUser = (user) => async (dispatch, getState) => {
 export const loginUser = (user) => async (dispatch, getState) => {
     try {
         const { data } = await axios.get(`users?email=${user.email}&password=${user.password}`)
+        if (!data || data.length === 0) {
+            console.log("User not found");
+            return false
+        }
         localStorage.setItem("user", JSON.stringify(data[0]))
+        return true
 
     } catch (error) {
         console.log("error")

@@ -8,10 +8,16 @@ const Login = () => {
   const navigate = useNavigate()
   const { register, handleSubmit, formState: { errors } } = useForm()
   const dispatch = useDispatch()
-  const loginHandle = (data) => {
+  const loginHandle = async (data) => {
     data.id = nanoid()
-    dispatch(loginUser(data))
-    navigate("/")
+    const res = await dispatch(loginUser(data))
+    if (res) {
+      navigate("/")
+    } else {
+      navigate("/register")
+    }
+
+
   }
 
   return <div className="flex items-center justify-center">
