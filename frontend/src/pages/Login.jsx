@@ -20,8 +20,8 @@ const Login = () => {
 
   }
 
-  return <div className="flex items-center justify-center">
-    <form className="flex items-center flex-col w-full  px-10 mt-10 py-5 gap-2 md:w-2/3 lg:w-1/3" onSubmit={handleSubmit(loginHandle)} autoComplete="off">
+  return <div className="flex items-center justify-center h-screen md:h-[80%] lg:h-[80%] md:w-full">
+    <form className="flex items-center flex-col w-[80%] px-10 mt-20 py-5 gap-2 md:w-1/2 lg:w-1/3 bg-[#fff] rounded-2xl " onSubmit={handleSubmit(loginHandle)} autoComplete="off">
       <h1 className="font-semibold mb-10 text-2xl">Log in</h1>
       <input type="email"
         {...register("emailid", { required: "Email can't blank" })}
@@ -39,7 +39,7 @@ const Login = () => {
       />
       {errors.password && <p className="text-red-500">{errors.password.message}</p>}
       <button className=" px-2 py-1 mt-3 w-full rounded-[50px] bg-[#5352EC] text-[#fff] font-semibold cursor-pointer">Log In</button>
-      <p className="mt-5">Dont have an Account ? <Link to="/register" className="text-blue-400 border-b border-blue-500">Sign Up</Link></p>
+      <p className="mt-10 mb-3">Dont have an Account ? <Link to="/register" className="text-blue-400 border-b border-blue-500">Sign Up</Link></p>
     </form>
   </div>;
 };

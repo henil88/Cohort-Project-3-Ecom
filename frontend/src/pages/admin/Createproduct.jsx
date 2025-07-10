@@ -2,16 +2,19 @@ import { nanoid } from "nanoid";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { asyncCreateProduct } from "../../action/productAction";
+import { useDispatch } from "react-redux";
 
 const Createproduct = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm()
     const watchedValues = watch()
     const navigate = useNavigate()
-
+    const dispatch = useDispatch()
 
     const createProductHandler = (product) => {
         product.id = nanoid()
-        console.log("product crated", product)
+        console.log(product)
+        dispatch(asyncCreateProduct(product))
         navigate("/products")
     }
     return <div className="flex w-full flex-col md:flex-row gap-5">
@@ -19,7 +22,7 @@ const Createproduct = () => {
             <form className="flex items-center flex-col w-full px-10 mt-10 py-5 gap-2 md:w-full lg:w-full" onSubmit={handleSubmit(createProductHandler)} autoComplete="off">
                 <h1 className="font-semibold mb-10 text-2xl">Create Product</h1>
                 <input type="url"
-                    {...register("url", { required: "url can't blank" })}
+                    {...register("image", { required: "url can't blank" })}
                     placeholder="Producr-url"
                     className="border-b outline-0 w-full py-1 px-1"
 
@@ -41,12 +44,12 @@ const Createproduct = () => {
                 />
                 {errors.price && <p className="text-red-500">{errors.price.message}</p>}
                 <textarea
-                    {...register("desc", { required: "description can't blanl" })}
+                    {...register("description", { required: "description can't blanl" })}
                     placeholder="Product Description"
                     className="outline-0 w-full border-b px-1"
                 >
                 </textarea>
-                {errors.desc && <p className="text-red-500">{errors.desc.message}</p>}
+                {errors.description && <p className="text-red-500">{errors.description.message}</p>}
                 <input
                     {...register("category", { required: "category can't blank" })}
                     placeholder="catogary"
@@ -58,11 +61,11 @@ const Createproduct = () => {
         </div>
         <div className="flex items-center flex-col w-full px-10 mt-10 py-5 gap-2 md:w-1/2 lg:w-1/2">
             <h1 className="font-semibold mb-10 text-2xl">Product Overview</h1>
-            {watchedValues.url ? (
+            {watchedValues.image ? (
                 <img
-                    src={watchedValues.url}
+                    src={watchedValues.image}
                     alt="Product Preview"
-                    className="w-full max-h-60 object-contain mb-4"
+                    className="w-full max-h-60 object-contain mb-4 mix-blend-multiply"
                 />
             ) : (
                 <div className="w-full h-60 flex items-center justify-center bg-gray-100 text-gray-400 mb-4 border">
@@ -75,7 +78,7 @@ const Createproduct = () => {
 
             {/* Description */}
             <p className="text-gray-700 mb-2 break-words w-full px-2 text-center">
-                {watchedValues.desc || "Product description will appear here."}
+                {watchedValues.description || "Product description will appear here."}
             </p>
 
             {/* Price */}
