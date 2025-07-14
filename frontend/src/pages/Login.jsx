@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form"
 import { nanoid } from "nanoid"
 import { useDispatch } from "react-redux";
 import { loginUser } from "../action/userAction";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -14,11 +16,15 @@ const Login = () => {
     if (res) {
       navigate("/")
     } else {
+      toast.error("please register first", {
+        autoClose: 3000,
+        hideProgressBar: true
+      })
       navigate("/register")
     }
-
-
   }
+
+  
 
   return <div className="flex items-center justify-center h-screen md:h-[80%] lg:h-[80%] md:w-full">
     <form className="flex items-center flex-col w-[80%] px-10 mt-20 py-5 gap-2 md:w-1/2 lg:w-1/3 bg-[#fff] rounded-2xl " onSubmit={handleSubmit(loginHandle)} autoComplete="off">

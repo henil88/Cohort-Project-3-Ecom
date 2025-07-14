@@ -6,12 +6,12 @@ import { logOut } from "../action/userAction";
 
 const Nav = ({ open, setOpen }) => {
   const navRef = useRef(null);
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const logoutHandler = () => {
-    dispatch(logOut())
-    navigate("/login")
-  }
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch()
+  // const logoutHandler = () => {
+  //   dispatch(logOut())
+  //   navigate("/login")
+  // }
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -41,7 +41,8 @@ const Nav = ({ open, setOpen }) => {
       {user?.isAdmin && (<NavLink to="/admin/create-product" onClick={() => setOpen(false)}>
         Create Product
       </NavLink>)}
-      <button onClick={logoutHandler}>Log-out</button>
+      <NavLink to="/Setting" onClick={() => { setOpen(false) }}>Setting</NavLink>
+      {/* <button onClick={logoutHandler}>Log-out</button> */}
     </> : <>
       <NavLink to="/login" onClick={() => { setOpen(false) }}>Login</NavLink>
     </>}

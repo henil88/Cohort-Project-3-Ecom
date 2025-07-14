@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../action/userAction";
 import { useDispatch } from 'react-redux'
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -12,7 +13,12 @@ const Register = () => {
     data.id = nanoid()
     data.isAdmin = false
     dispatch(registerUser(data))
+    toast.success("register succes", {
+      autoClose: 3000,
+      hideProgressBar: true
+    });
     navigate("/")
+
   }
 
 

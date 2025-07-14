@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { asyncCreateProduct } from "../../action/productAction";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const Createproduct = () => {
     const { register, handleSubmit, formState: { errors }, watch } = useForm()
@@ -15,6 +16,11 @@ const Createproduct = () => {
         product.id = nanoid()
         console.log(product)
         dispatch(asyncCreateProduct(product))
+        toast.success("Product Created", {
+            autoClose: 2000,
+            hideProgressBar: true
+        }
+        )
         navigate("/products")
     }
     return <div className="flex w-full flex-col md:flex-row gap-5">
@@ -41,7 +47,7 @@ const Createproduct = () => {
                     type="number"
                     placeholder="price"
                     className="outline-0 w-full border-b py-1 px-1"
-                     step="any"
+                    step="any"
                 />
                 {errors.price && <p className="text-red-500">{errors.price.message}</p>}
                 <textarea

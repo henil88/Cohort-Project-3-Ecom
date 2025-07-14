@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { asyncDeleteProduct, asyncUpdateProduct } from "../../action/productAction";
+import { toast } from "react-toastify";
 
 const Productdetails = () => {
   const dispatch = useDispatch()
@@ -23,6 +24,10 @@ const Productdetails = () => {
 
   const updateProductHandler = (updatedata) => {
     dispatch(asyncUpdateProduct(id, updatedata))
+    toast.success("Product Updated", {
+      autoClose: 1000,
+      hideProgressBar: true
+    })
     navigate("/products")
   }
   return <>
@@ -82,9 +87,13 @@ const Productdetails = () => {
           />
           {errors.category && <p className="text-red-500">{errors.category.message}</p>}
           <div className="flex items-center justify-between w-full">
-            <button className=" px-2 py-1 mt-3  rounded-[50px] w-1/3 bg-[#5352EC] text-[#fff] font-semibold cursor-pointer">Update Product</button>
-            <button type="button" className="px-2 py-1 mt-3 w-1/3 rounded-[50px] bg-red-500 text-[#fff] font-semibold cursor-pointer" onClick={() => {
+            <button className="py-1 mt-3  rounded-[50px] px-2 w-fit text-[10px] sm:w-1/3 sm:text-xl sm:font-normal bg-[#5352EC] text-[#fff] font-semibold cursor-pointer">Update Product</button>
+            <button type="button" className="px-2 py-1 mt-3 w-fit text-[10px] sm:w-1/3 sm:text-xl sm:font-normal rounded-[50px] bg-red-500 text-[#fff] font-semibold cursor-pointer" onClick={() => {
               dispatch(asyncDeleteProduct(id))
+              toast.error("Product Deleted", {
+                autoClose: 1000,
+                hideProgressBar: true
+              })
               navigate("/products")
             }}>Delete Product</button>
           </div>
