@@ -1,10 +1,18 @@
 
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logOut } from "../action/userAction";
 
 const Nav = ({ open, setOpen }) => {
   const navRef = useRef(null);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const logoutHandler = () => {
+    dispatch(logOut())
+    navigate("/login")
+  }
+
   useEffect(() => {
     const handleOutsideClick = (e) => {
       // console.log(e.target)
@@ -30,9 +38,11 @@ const Nav = ({ open, setOpen }) => {
     <NavLink to="/products" onClick={() => { setOpen(false) }}>Products</NavLink>
     {user ? <>
       <NavLink to="/cart" onClick={() => { setOpen(false) }}>Cart</NavLink>
-      <NavLink to="/admin/create-product" onClick={() => { setOpen(false) }}>Create Product</NavLink>
+      {user?.isAdmin && (<NavLink to="/admin/create-product" onClick={() => setOpen(false)}>
+        Create Product
+      </NavLink>)}
+      <button onClick={logoutHandler}>Log-out</button>
     </> : <>
-
       <NavLink to="/login" onClick={() => { setOpen(false) }}>Login</NavLink>
     </>}
   </nav>

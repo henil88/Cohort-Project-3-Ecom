@@ -41,6 +41,7 @@ const Createproduct = () => {
                     type="number"
                     placeholder="price"
                     className="outline-0 w-full border-b py-1 px-1"
+                     step="any"
                 />
                 {errors.price && <p className="text-red-500">{errors.price.message}</p>}
                 <textarea
