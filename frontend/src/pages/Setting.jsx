@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../action/userAction";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const Setting = () => {
+    const navigate = useNavigate()
     const { userData } = useSelector((state) => state.userReducer)
     const { register, reset, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -14,8 +17,13 @@ const Setting = () => {
     })
     const dispatch = useDispatch()
     const updateUserData = (data) => {
-        console.log(data)
+        // console.log(data)
         dispatch(updateUser(userData.id, data))
+        toast.success("detais updated", {
+            autoClose: 2000,
+            hideProgressBar: true
+        })
+        navigate("/")
     }
 
     const [formOpen, setFormOpen] = useState(false)
